@@ -14,6 +14,8 @@ import {
     loginLimiter, 
     otpRequestLimiter 
 } from "../middlewares/rateLimiterMiddleware.js";
+import { sendOTPController, } from "../controllers/sendOTPController.js";
+import { verifyOTPController } from "../controllers/verifyOTPController .js";
 
 const authRouter = e.Router();
 

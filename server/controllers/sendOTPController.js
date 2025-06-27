@@ -1,11 +1,11 @@
-import User from "../models/user";
-import { sendOTPEmail } from "../utils/sendEmail";
+import User from "../models/user.js";
+import { sendOTPEmail } from "../utils/sendEmail.js";
 
-const sendOTPController = async (req, res) => {
+export const sendOTPController = async (req, res) => {
   const { email } = req.body;
 
   try {
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -24,6 +24,6 @@ const sendOTPController = async (req, res) => {
 
     res.status(200).json({ message: "OTP sent to your email" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to send OTP", error: err.message });
+    res.status(500).json({ message: "Failed to send OTP", error: error.message });
   }
 };

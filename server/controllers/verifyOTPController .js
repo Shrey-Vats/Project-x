@@ -1,10 +1,11 @@
-import User from "../models/user"
+import User from "../models/user.js"
 
 export const verifyOTPController = async (req, res) => {
-    const {email, otp} = req.body
+    const email = req.body.email.trim().toLowerCase();
+    const otp = req.body.otp.trim();
 
     try {
-        const user = User.findOne({ email });
+        const user = await User.findOne({ email });
 
         if (
           !user ||
