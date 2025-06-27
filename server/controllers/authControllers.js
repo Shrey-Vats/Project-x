@@ -49,6 +49,12 @@ export const LoginController = async (req, res) => {
       });
     }
 
+    if (!user.isVerified) {
+      return res
+        .status(403)
+        .json({ message: "Please verify your email first." });
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -97,7 +103,11 @@ export const forgetPasswordController = async (req, res) => {
       });
     }
 
-    // here otp validation code come for now i do not write it but in future definatly
+    if (!user.isVerified) {
+      return res
+        .status(403)
+        .json({ message: "Please verify your email first." });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 

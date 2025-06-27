@@ -17,6 +17,7 @@ export const verifyOTPController = async (req, res) => {
 
         user.otp = null;
         user.otpExpires = null;
+        user.isVerified = true;
         await user.save();
 
         res.status(200).json({ message: "OTP verified successfully" });

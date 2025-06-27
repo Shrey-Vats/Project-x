@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   otp: String,
   otpExpires: Date,
+  isVerified: { type: Boolean, default: false, }
 });
 
 const User = mongoose.model("User", UserSchema);
